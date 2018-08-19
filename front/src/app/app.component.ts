@@ -14,11 +14,7 @@ export class AppComponent {
 
   accepts: any[];
   orders: any[];
-
-  public setOrder() {
-   
-  }
-
+  interval: boolean = true;
   constructor() {
     // this.accept();
 
@@ -45,7 +41,21 @@ export class AppComponent {
       "value": "R$16,00",
     });
 
-    setInterval(this.setOrder(), 3000);
+    if (this.interval) {
+      var interval = setInterval(function () {
+        var order = document.getElementById("order");
+        order.click();
+        clearInterval(interval);
+      }, 3000);
+    } else {
+      clearInterval(interval);
+    }
+
+    // var interval = setInterval(function () {
+    //   var order = document.getElementById("order");
+    //   order.click();
+    //   clearInterval(interval);
+    // }, 3000);
   }
 
   public accept() {
@@ -60,22 +70,28 @@ export class AppComponent {
 
     this.orders.splice(0, 1);
 
+    // this.setOrder();
+  }
+
+  public ok() {
     this.orders.push({
       "order": "Frango e saladinha - 500g",
       "address": "Rua Jose alencar",
       "distance": "5km",
       "value": "R$12,00",
     });
-    
+
     this.orders.push({
       "order": "Arroz, Feijao, salada de cenoura e filé de frango- 400g",
       "address": "Rua Pedro Paulo",
       "distance": "4km",
       "value": "R$18,00",
     });
+
+    this.interval = false;
   }
 
-  
+
 
   public deal() {
     swal({
