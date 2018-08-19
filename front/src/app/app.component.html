@@ -16,7 +16,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h3>Pendentes</h3>
+          <h3>Orders</h3>
         </div>
       </div>
       <div class="row">
@@ -24,25 +24,29 @@
           <table class="table-striped table-horvered table">
             <thead>
               <tr>
-                <th>Pedido</th>
-                <th>Endereço</th>
-                <th>Distância</th>
-                <th>Valor proposto</th>
-                <th>Aceitar</th>
-                <th>Negociar</th>
+                <th>Order</th>
+                <th>Address</th>
+                <th>Distance</th>
+                <th>Value</th>
+                <th class="text-center">Accept</th>
+                <th class="text-center">Deal</th>
+                <th class="text-center">Decline</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Arroz integral, Batata e carne moida - 400g</td>
-                <td>Rua Fernandez Palero, 225. APT22A</td>
-                <td>10km</td>
-                <td>R$14,00</td>
-                <td>
-                  <input type="button" class="btn btn-primary" value="ACEITAR" />
+              <tr *ngFor="let order of orders">
+                <td>{{order.order}}</td>
+                <td>{{order.address}}</td>
+                <td>{{order.distance}}</td>
+                <td>{{order.value}}</td>
+                <td class="text-center">
+                  <input type="button" class="btn btn-primary form-control" value="ACCEPT" (click)="accept();"/>
                 </td>
-                <td>
-                  <input type="button" class="btn btn-primary" value="NEGOCIAR" />
+                <td class="text-center">
+                  <input type="button" class="btn btn-primary form-control" value="DEAL"(click)="deal();"/>
+                </td>
+                <td class="text-center">
+                  <input type="button" class="btn btn-danger form-control" value="DECLINE"(click)="deal();"/>
                 </td>
               </tr>
             </tbody>
@@ -56,7 +60,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h3>Aceitos</h3>
+          <h3>Accepts</h3>
         </div>
       </div>
       <div class="row">
@@ -64,18 +68,18 @@
           <table class="table-striped table-horvered table">
             <thead>
               <tr>
-                <th>Pedido</th>
-                <th>Endereço</th>
-                <th>Distância</th>
-                <th>Valor aceito</th>
+                <th>Order</th>
+                <th>Address</th>
+                <th>Distance</th>
+                <th>Value</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Arroz integral, Batata e carne moida - 400g</td>
-                <td>Rua Fernandez Palero, 225. APT22A</td>
-                <td>10km</td>
-                <td>R$14,00</td>
+              <tr *ngFor="let accept of accepts">
+                <td>{{accept.order}}</td>
+                <td>{{accept.address}}</td>
+                <td>{{accept.distance}}</td>
+                <td>{{accept.value}}</td>
               </tr>
             </tbody>
           </table>
