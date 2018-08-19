@@ -3,6 +3,20 @@
     height: 0.5px;
 }
 
+
+.title-profile {
+    color:#363636;
+    font-size:22px!important;
+
+}
+
+.icon-profile {
+    margin-top: -20px;
+    margin-left: 40px;
+    height: 50px;
+    width: 50px;
+} 
+
 .bg-nav {
     background-color: #45AFa4;
     color: white;
