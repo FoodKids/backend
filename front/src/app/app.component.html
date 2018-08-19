@@ -1,9 +1,9 @@
 <nav class="navbar navbar-light bg-nav">
   <span class="navbar-brand mb-0 h1 bg-nav">foodKids</span>
 </nav>
-<img src="https://www.264fresco.com/img/italian-speciality-restaurant.jpg" class="img-init" />
+<!-- <img src="https://www.264fresco.com/img/italian-speciality-restaurant.jpg" class="img-init" />
 <div class="title-foodkids centered">foodKids</div>
-<div class="div-view"></div>
+<div class="div-view"></div> -->
 <br>
 <br>
 
@@ -16,7 +16,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h3>Orders</h3>
+          <h3 class="title-foodkids">Orders</h3>
         </div>
       </div>
       <div class="row">
@@ -35,18 +35,18 @@
             </thead>
             <tbody>
               <tr *ngFor="let order of orders">
-                <td>{{order.order}}</td>
-                <td>{{order.address}}</td>
-                <td>{{order.distance}}</td>
-                <td>{{order.value}}</td>
+                <td ><p class="font-list">{{order.order}}</p></td>
+                <td ><p class="font-list">{{order.address}}</p></td>
+                <td ><p class="font-list">{{order.distance}}</p></td>
+                <td ><p class="font-list">{{order.value}}</p></td>
                 <td class="text-center">
-                  <input type="button" class="btn btn-primary form-control" value="ACCEPT" (click)="accept();"/>
+                  <input type="button" class="btn form-control button-foodkids" value="ACCEPT" (click)="accept();"/>
                 </td>
                 <td class="text-center">
-                  <input type="button" class="btn btn-primary form-control" value="DEAL"(click)="deal();"/>
+                  <input type="button" class="btn button-alt-foodkids form-control" value="DEAL"(click)="deal();"/>
                 </td>
                 <td class="text-center">
-                  <input type="button" class="btn btn-danger form-control" value="DECLINE"(click)="deal();"/>
+                  <input type="button" class="btn button-dec-foodkids form-control" value="DECLINE"(click)="deal();"/>
                 </td>
               </tr>
             </tbody>
@@ -60,7 +60,7 @@
 
       <div class="row">
         <div class="col-12">
-          <h3>Accepts</h3>
+          <h3 class="title-foodkids">Accepts</h3>
         </div>
       </div>
       <div class="row">
@@ -76,18 +76,15 @@
             </thead>
             <tbody>
               <tr *ngFor="let accept of accepts">
-                <td>{{accept.order}}</td>
-                <td>{{accept.address}}</td>
-                <td>{{accept.distance}}</td>
-                <td>{{accept.value}}</td>
+                <td><p class="font-list">{{accept.order}}</p></td>
+                <td><p class="font-list">{{accept.address}}</p></td>
+                <td><p class="font-list">{{accept.distance}}</p></td>
+                <td><p class="font-list">{{accept.value}}<img src="https://png.icons8.com/color/1600/cash-.png" class="icon-list"/></p></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-
   </div>
-
-
 </div>

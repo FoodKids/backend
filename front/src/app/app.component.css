@@ -2,16 +2,53 @@
     background-color: #313323;
     height: 0.5px;
 }
+
 .bg-nav {
-    background-color: black;
+    background-color: #45AFa4;
     color: white;
+    font-size: 35px;
     font-family: Gill Sans, sans-serif;
 }
 
 .title-foodkids {
     font-family: Gill Sans, sans-serif;
-    font-size: 100px;
-    color: black;
+    font-size: 25px;
+    color: #45AFa4;
+}
+
+.icon-list {
+    margin-top:-10px;
+    margin-left:10px;
+    height: 30px;
+    width: 30px;
+}
+
+.font-list {
+    margin-left:5px;
+    margin-top:10px;
+    font-family: Gill Sans, sans-serif;
+    font-size: 20px;
+} 
+
+.button-foodkids {
+    font-family: Gill Sans, sans-serif;
+    font-size: 20px;
+    background-color: #45AFa4;
+    color: white;
+}
+
+.button-alt-foodkids {
+    font-family: Gill Sans, sans-serif;
+    font-size: 20px;
+    background-color: #7E5Ad8;
+    color: white;
+}
+
+.button-dec-foodkids {
+    font-family: Gill Sans, sans-serif;
+    font-size: 20px;
+    background-color: hsl(0, 83%, 41%);
+    color: white;
 }
 
 .img-init {
