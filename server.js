@@ -58,6 +58,37 @@ function getFoods(restriction, meal) {
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Guisado de lentilha com legumes." });
       }
       break;
+    case "no-restriction":
+      if(meal == "cafe") {
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Cestinhas de brioche com ovo" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Tapioca com linhaça dourada" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Pão de queijo de frigideira" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Ovos mexidos com cogumelos" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Smoothie de morango e jabuticaba" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Panqueca de banana com pasta de amendoim" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Pão de queijo de caneca" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Pão de micro-ondas" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Crepioca" });
+      } else if(meal == "almoco") {
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": " Panqueca" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Robalo grelhado" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": " Talharim de abobrinha" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Salmão grelhado com molho de limão" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Bisteca de porco grelhada" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Quinoa com legumes, homus e pão pita" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Frango com legumes" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Salada árabe" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Frango grelhado ao molho de laranja e purê de batatas" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Farofa de soja" });
+      } else if(meal == "janta") {
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Atum com crosta de quinoa" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Omelete à florentina" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Macarrão caprese com frango" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Salada verde com salmão selado" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Legumes salteados" });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Massa chinesa com legumes e filetes de cavala" });
+      }
+      break;
     default:
       break;
   }
@@ -94,15 +125,21 @@ function suffleArray(foods, timesAWeek) {
 function extractFoods(restrictions, meals, timesAWeek) {
   var foods = [];
 
-  if (meals != undefined || reqeust.body.meals != "") {
+  if (meals != undefined || meals != "") {
     if (meals.length > 0) {
-      if (restrictions != undefined || reqeust.body.restrictions != "") {
+      if (restrictions != undefined || restrictions != "") {
         if (restrictions.length > 0) {
           for (const restriction of restrictions) {
             for (const meal of meals) {
               if(timesAWeek != undefined || timesAWeek != "") {
                 foods.push(getFoods(restriction, meal, timesAWeek));
               }
+            }
+          }
+        } else {
+          for (const meal of meals) {
+            if(timesAWeek != undefined || timesAWeek != "") {
+              foods.push(getFoods("no-restriction", meal, timesAWeek));
             }
           }
         }
