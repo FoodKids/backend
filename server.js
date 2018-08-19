@@ -12,9 +12,8 @@ app.use(bodyParser.json());
 //   response.end("");
 // }); 
 
-function getFoods(restriction, meal, timesAWeek) {
-
-  let foods = [];
+function getFoods(restriction, meal) {
+  var foods = new Array();
 
   switch (restriction) {
     case "celiaca":
@@ -51,11 +50,11 @@ function getFoods(restriction, meal, timesAWeek) {
       if (meal == "almoco" || meal == "jantar") {
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Macarrão integral com legumes." });
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Assado de lentilhas e cogumelos." });
+        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Strogonoff de berinjela e palmito." });
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Couve-flor assada com molho de tahine." });
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Kibe de berinjela com quinua." });
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Batata assada com creme de couve-flor." });
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Ravioli com queijo de amêndoas." });
-        foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Strogonoff de berinjela e palmito." });
         foods.push({ "price-max": 28.0, "price-min": 20.0, "name": "Guisado de lentilha com legumes." });
       }
       break;
@@ -63,6 +62,16 @@ function getFoods(restriction, meal, timesAWeek) {
       break;
   }
 
+  return foods;
+}
+
+function calculateIMC(height, weight) {
+  var imc = 0;
+  imc = weight / (height * height);
+  return imc;
+}
+
+function suffleArray(foods, timesAWeek) {
   foods.sort(function (a, b) {
     return Math.floor(Math.random() * 10);
   });
@@ -70,8 +79,9 @@ function getFoods(restriction, meal, timesAWeek) {
   let foodsSelected = [];
   let count = 0;
   for(const food of foods) {
+    console.log(food);
     if(count < timesAWeek) {
-      foodsSelected = food;
+      foodsSelected.push(food);
     } else {
       break;
     }
@@ -81,27 +91,39 @@ function getFoods(restriction, meal, timesAWeek) {
   return foodsSelected;
 }
 
-
-app.post("/get-foods", function (request, response) {
+function extractFoods(restrictions, meals, timesAWeek) {
   var foods = [];
-  if (request.body.meals != undefined || reqeust.body.meals != "") {
-    if (request.body.meals.length > 0) {
-      if (request.body.restrictions != undefined || reqeust.body.restrictions != "") {
-        if (request.body.restrictions.length > 0) {
-          for (const restriction of request.body.restrictions) {
-            for (const meal of request.body.meals) {
-              if(request.body.timesAWeek != undefined || request.body.timesAWeek != "") {
-                foods.push(getFoods(restriction, meal, request.body.timesAWeek));
+
+  if (meals != undefined || reqeust.body.meals != "") {
+    if (meals.length > 0) {
+      if (restrictions != undefined || reqeust.body.restrictions != "") {
+        if (restrictions.length > 0) {
+          for (const restriction of restrictions) {
+            for (const meal of meals) {
+              if(timesAWeek != undefined || timesAWeek != "") {
+                foods.push(getFoods(restriction, meal, timesAWeek));
               }
             }
           }
         }
       }
-
     }
   }
 
-  response.send("" + JSON.stringify(foods));
+  let foodsSelected = [];
+  for(const listfood of foods) {
+    if(listfood.length > 0) {
+      for(let food of listfood) {
+        foodsSelected.push(food);
+      }
+    }
+  }
+
+  return foodsSelected = suffleArray(foodsSelected, timesAWeek);
+}
+
+app.post("/get-foods", function (request, response) {
+  response.send("" + JSON.stringify(extractFoods(request.body.restrictions, request.body.meals, request.body.timesAWeek)));
 });
 
 
@@ -112,11 +134,7 @@ app.get("/calculateIMC", function (request, response) {
   response.end("" + calculateIMC(height, weight));
 });
 
-function calculateIMC(height, weight) {
-  var imc = 0;
-  imc = weight / (height * height);
-  return imc;
-}
+
 
 app.listen(port);
 console.log("Listening on port ", port);
